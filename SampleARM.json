@@ -1,0 +1,56 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "factoryName": {
+      "type": "string",
+      "metadata": "Data Factory name"
+    },
+    "dataFactoryLocation": {
+      "type": "string",
+      "metadata": {
+        "description": "Location of the data factory. Currently, only West Central US are supported. "
+      }
+    },
+    "AzureKeyVaultTemplate_properties_typeProperties_baseUrl": {
+      "type": "string"
+    }
+  },
+  "variables": {
+    "factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+  },
+  "resources": [
+    {
+      "name": "[parameters('factoryName')]",
+      "apiVersion": "2018-06-01",
+      "type": "Microsoft.DataFactory/factories",
+      "location": "[parameters('dataFactoryLocation')]",
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "resources": [
+        {
+          "name": "linkedTemplate",
+          "type": "Microsoft.Resources/deployments",
+          "apiVersion": "2018-05-01",
+          "properties": {
+            "mode": "Incremental",
+            "templateLink": {
+              "uri": "[uri(deployment().properties.templateLink.uri, 'AzureKeyVaultTemplate.json')]",
+              "contentVersion": "1.0.0.0"
+            },
+            "parameters": {
+              "factoryName": {
+                "value": "[parameters('factoryName')]"
+              },
+              "AzureKeyVaultTemplate_properties_typeProperties_baseUrl": {
+                "value": "[parameters('AzureKeyVaultTemplate_properties_typeProperties_baseUrl')]"
+              }
+            }
+          },
+          
+        }
+      ]
+    }
+  ]
+}
