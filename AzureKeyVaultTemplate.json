@@ -15,7 +15,7 @@
     "resources": [
         {
             "type": "Microsoft.DataFactory/factories/linkedServices",
-			"name": "[concat(parameters('factoryName'), '/AzureKeyVaultTemplate')]"
+			"name": "[concat(parameters('factoryName'), '/AzureKeyVaultTemplate')]",
             "apiVersion": "2018-06-01",
             "location": "eastus",
             "properties": {
