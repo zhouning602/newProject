@@ -7,8 +7,7 @@
       "metadata": "Data Factory name"
     },
         "AzureKeyVaultTemplate_properties_typeProperties_baseUrl": {
-		  "type": "string",
-		  "defaultValue": "https://Sanagam-KeyVaut-dev.vault.azure.net/"
+		  "type": "string"
 		}
     },
 	

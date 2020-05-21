@@ -48,7 +48,9 @@
               }
             }
           },
-          
+          "dependsOn": [
+            "[parameters('factoryName')]"
+          ]
         }
       ]
     }
