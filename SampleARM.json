@@ -4,16 +4,19 @@
   "parameters": {
     "factoryName": {
       "type": "string",
-      "metadata": "Data Factory name"
+      "metadata": "Data Factory name",
+      "defaultValue": "dataworkflowSample1"
     },
     "dataFactoryLocation": {
       "type": "string",
+	  "defaultValue":"West Central US",
       "metadata": {
         "description": "Location of the data factory. Currently, only West Central US are supported. "
       }
     },
     "AzureKeyVaultTemplate_properties_typeProperties_baseUrl": {
-      "type": "string"
+      "type": "string",
+	  "defaultValue": "https://Sanagam-KeyVaut-dev.vault.azure.net/"
     }
   },
   "variables": {
@@ -32,7 +35,7 @@
         {
           "name": "linkedTemplate",
           "type": "Microsoft.Resources/deployments",
-          "apiVersion": "2018-05-01",
+          "apiVersion": "2018-06-01",
           "properties": {
             "mode": "Incremental",
             "templateLink": {
